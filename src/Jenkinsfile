@@ -1,0 +1,51 @@
+pipeline {
+    agent any
+
+    tools {
+        // This must match the name you gave Maven in Jenkins -> Manage Jenkins -> Tools
+        maven 'Maven 3'
+    }
+
+    environment {
+        GITHUB_REPO_URL = 'https://github.com/gishee003/SPE_Mini_Project'
+    }
+
+    stages {
+        stage('Clone Git') {
+            steps {
+                git branch: 'main',
+                    credentialsId: 'github_credentials',
+                    url: "${GITHUB_REPO_URL}"
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // Run tests first. If these fail, the pipeline stops here.
+                sh 'mvn test'
+            }
+        }
+
+        stage('Build JAR') {
+            steps {
+                // Now package the app. We skip tests here because they just passed.
+                sh 'mvn clean package -DskipTests'
+            }
+        }
+
+        stage('Verify & Archive') {
+            steps {
+                sh 'ls -lh target/'
+                // This saves the JAR so you can download it from the Jenkins UI
+                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+            }
+        }
+    }
+
+    post {
+        always {
+            // This records the JUnit XML files so Jenkins can show test trends/graphs
+            junit '**/target/surefire-reports/*.xml'
+        }
+    }
+}
