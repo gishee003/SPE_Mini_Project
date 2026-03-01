@@ -8,5 +8,4 @@ WORKDIR /app
 # Replace 'SPE_Mini_Project-1.0-SNAPSHOT.jar' if your artifact name differs
 COPY target/SPE_Mini_Project-1.0-SNAPSHOT.jar app.jar
 
-# Run the calculator application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+CMD ["sh", "-c", "java -jar scientific-calculator.jar && tail -f /dev/null"]
