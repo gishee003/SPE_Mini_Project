@@ -20,4 +20,4 @@
         state: started
         interactive: yes
         tty: yes
-        stdin_open: true
+        detach: yes
