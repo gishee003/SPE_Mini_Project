@@ -4,6 +4,7 @@
   connection: local
   tasks:
     - name: Install Docker
+      become: yes
       apt:
         name: docker.io
         state: present
