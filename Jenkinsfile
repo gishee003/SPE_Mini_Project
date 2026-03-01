@@ -35,7 +35,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh 'docker build -t kirtinigam003/scientific-calculator:latest .'
+                    sh 'docker build --no-cache -t kirtinigam003/scientific-calculator:latest .'
                 }
             }
         }
