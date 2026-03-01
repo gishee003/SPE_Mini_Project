@@ -40,6 +40,18 @@ pipeline {
             }
         }
 
+        stage('Push to Docker Hub') {
+            steps {
+                script {
+                    // This securely logs you in using the credentials we just saved
+                    withCredentials([usernamePassword(credentialsId: 'docker_hub_login', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                        sh "echo \$DOCKER_PASS | docker login -u \$DOCKER_USER --password-stdin"
+                        sh "docker push kirtinigam003/scientific-calculator:latest"
+                    }
+                }
+            }
+        }
+
         stage('Verify Output') {
             steps {
                 // Confirms the JAR exists in the target folder
