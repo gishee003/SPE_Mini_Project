@@ -1,5 +1,5 @@
 # Use a lightweight JDK 17 runtime as the parent image
-FROM eclipse-temurin:21-jdk-focal
+FROM eclipse-temurin:21-jdk-jammy
 
 # Set the working directory inside the container
 WORKDIR /app
