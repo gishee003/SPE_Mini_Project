@@ -66,4 +66,17 @@ pipeline {
             }
         }
     }
+
+    post {
+        success {
+            mail to: 'developer-email@example.com',
+                 subject: "SUCCESS: Build #${env.BUILD_NUMBER} of ${env.JOB_NAME}",
+                 body: "Great job! The calculator build and deployment were successful. \nCheck it out at: ${env.BUILD_URL}"
+        }
+        failure {
+            mail to: 'developer-email@example.com',
+                 subject: "FAILED: Build #${env.BUILD_NUMBER} of ${env.JOB_NAME}",
+                 body: "The build failed. Please check the console output here: ${env.BUILD_URL}"
+        }
+    }
 }

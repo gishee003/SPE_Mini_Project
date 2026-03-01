@@ -53,6 +53,7 @@ public class Calculator {
     }
 
     public static void main(String[] args) {
+        System.out.println("Press Enter to Start");
         Scanner scanner = new Scanner(System.in);
         int choice;
 
