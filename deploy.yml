@@ -1,0 +1,27 @@
+---
+- name: Deploy Scientific Calculator
+  hosts: webserver
+  connection: local
+  tasks:
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Pull Docker image from Hub
+      docker_image:
+        name: kirtinigam003/scientific-calculator:latest
+        source: pull
+
+    - name: Stop and remove existing container if it exists
+      docker_container:
+        name: calculator-app
+        state: absent
+
+    - name: Run the new Calculator container
+      docker_container:
+        name: calculator-app
+        image: kirtinigam003/scientific-calculator:latest
+        state: started
+        interactive: yes
+        tty: yes

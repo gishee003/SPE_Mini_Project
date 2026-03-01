@@ -52,6 +52,13 @@ pipeline {
             }
         }
 
+        stage('Deploy with Ansible') {
+            steps {
+                // This command triggers the Ansible playbook
+                sh 'ansible-playbook -i inventory.ini deploy.yml'
+            }
+        }
+
         stage('Verify Output') {
             steps {
                 // Confirms the JAR exists in the target folder
