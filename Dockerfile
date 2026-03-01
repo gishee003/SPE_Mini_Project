@@ -1,0 +1,12 @@
+# Use a lightweight JDK 17 runtime as the parent image
+FROM openjdk:17-jdk-slim
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the JAR file built by Maven into the container
+# Replace 'SPE_Mini_Project-1.0-SNAPSHOT.jar' if your artifact name differs
+COPY target/SPE_Mini_Project-1.0-SNAPSHOT.jar app.jar
+
+# Run the calculator application
+ENTRYPOINT ["java", "-jar", "app.jar"]

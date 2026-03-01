@@ -32,6 +32,14 @@ pipeline {
             }
         }
 
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    sh 'docker build -t kirtinigam003/scientific-calculator:latest .'
+                }
+            }
+        }
+
         stage('Verify Output') {
             steps {
                 // Confirms the JAR exists in the target folder
