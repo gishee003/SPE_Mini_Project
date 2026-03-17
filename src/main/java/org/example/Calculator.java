@@ -2,7 +2,7 @@ package org.example;
 import java.util.Scanner;
 
 public class Calculator {
-
+    // Comment from local
     public static double add(double a, double b) {
         return a + b;
     }
